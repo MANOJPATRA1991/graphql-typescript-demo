@@ -26,6 +26,7 @@ type Mutation {
 type Query {
   lyric(id: String!): Lyric!
   song(id: String!): Song!
+  songs: [Song!]!
 }
 
 """The song model"""

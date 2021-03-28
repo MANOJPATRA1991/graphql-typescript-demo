@@ -6,27 +6,23 @@ import { Ref } from "../types";
 
 @Service()
 export class LyricService {
-  getLyric(lyricId: String): Promise<Ref<Lyric> | null> {
-    return LyricModel
-      .findById({ _id: lyricId })
-      .then(lyric => lyric);
+  async getLyric(lyricId: String): Promise<Ref<Lyric> | null> {
+    const lyric = await LyricModel.findById({ _id: lyricId });
+    return lyric;
   }
 
-  findSong(lyricId: String): Promise<Ref<Song> | undefined> {
-    return LyricModel
+  async findSong(lyricId: String): Promise<Ref<Song> | undefined> {
+    const lyric = await LyricModel
       .findById({ _id: lyricId })
-      .populate('song')
-      .then(lyric => lyric?.song);
+      .populate('song');
+    return lyric?.song;
   }
 
-  likeLyric(lyricId: String): Promise<Ref<Lyric> | undefined> {
-    return LyricModel
-      .findById({ _id: lyricId  })
-      .then(lyric => {
-        if (!!lyric) {
-          ++lyric.likes;
-        }
-        return lyric?.save();
-      })
+  async likeLyric(lyricId: String): Promise<Ref<Lyric> | undefined> {
+    const lyric = await LyricModel.findById({ _id: lyricId });
+    if (!!lyric) {
+      ++lyric.likes;
+    }
+    return lyric?.save();
   }
 }

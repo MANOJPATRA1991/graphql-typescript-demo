@@ -5,37 +5,36 @@ import { Ref } from "../types";
 
 @Service()
 export class SongService {
-  getAllSongs(): Promise<Ref<Song>[] | undefined> {
-    return SongModel
-      .find({})
-      .then(songs => songs);
+  async getAllSongs(): Promise<Ref<Song>[] | undefined> {
+    const songs = await SongModel
+      .find({});
+    return songs;
   }
-  getSong(song_id: String): Promise<Ref<Song> | null> {
-    return SongModel
-      .findById({ _id: song_id })
-      .then(song => song);
+  async getSong(song_id: String): Promise<Ref<Song> | null> {
+    const song = await SongModel.findById({ _id: song_id });
+    return song;
   }
 
-  findLyrics(songId: String): Promise<Ref<Lyric>[] | undefined> {
-    return SongModel
+  async findLyrics(songId: String): Promise<Ref<Lyric>[] | undefined> {
+    const song = await SongModel
       .findById({ _id: songId })
-      .populate('lyrics')
-      .then(song =>  song?.lyrics);
+      .populate('lyrics');
+    return song?.lyrics;
   }
 
   addSong(title: String): Promise<Ref<Song>> {
     return (new SongModel({ title })).save();
   }
 
-  addLyric(songId: String, content: String): Promise<Ref<Song> | undefined> {
-    return SongModel
-      .findById({ _id: songId })
-      .then(song => {
-        const lyric = new LyricModel({ content, song });
-        song?.lyrics.push(lyric);
-        return Promise.all([lyric.save(), song?.save()])
-          .then(([lyric, song]) => song);
-      });
+  async addLyric(songId: String, content: String): Promise<Ref<Song> | undefined> {
+    const song = await SongModel.findById({ _id: songId });
+    const lyric = new LyricModel({ content, song });
+    song?.lyrics.push(lyric);
+    const [lyric_1, song_1] = await Promise.all([
+      lyric.save(),
+      song?.save()
+    ]);
+    return song_1;
   }
   
   deleteSong(songId: String) {

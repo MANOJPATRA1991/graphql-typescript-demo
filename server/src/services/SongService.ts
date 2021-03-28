@@ -5,6 +5,11 @@ import { Ref } from "../types";
 
 @Service()
 export class SongService {
+  getAllSongs(): Promise<Ref<Song>[] | undefined> {
+    return SongModel
+      .find({})
+      .then(songs => songs);
+  }
   getSong(song_id: String): Promise<Ref<Song> | null> {
     return SongModel
       .findById({ _id: song_id })

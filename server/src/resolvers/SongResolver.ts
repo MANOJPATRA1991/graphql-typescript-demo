@@ -13,6 +13,11 @@ export class SongResolver {
     private readonly songService: SongService,
   ) { }
 
+  @Query(returns => [Song])
+  songs(): Promise<Ref<Song>[] | undefined> {
+    return this.songService.getAllSongs();
+  }
+
   @Query(returns => Song)
   song(@Arg("id") id: String): Promise<Ref<Song> | null> {
     return this.songService.getSong(id);

@@ -1,0 +1,15 @@
+.collection-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.material-icons {
+  cursor: pointer;
+}
+
+.like-box {
+  display: flex;
+  width: 50px;
+  align-items: center;
+  justify-content: space-between;
+}

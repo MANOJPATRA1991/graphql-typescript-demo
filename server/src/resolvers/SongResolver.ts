@@ -1,4 +1,4 @@
-import { Query, Arg, FieldResolver, Resolver, Root, Mutation, Args } from "type-graphql";
+import { Query, Arg, FieldResolver, Resolver, Root, Mutation } from "type-graphql";
 import { Service } from "typedi";
 import { Lyric } from "../entities/Lyric";
 import { Song } from "../entities/Song";

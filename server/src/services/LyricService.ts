@@ -1,4 +1,3 @@
-import { DocumentType } from "@typegoose/typegoose";
 import { Service } from "typedi";
 import { Lyric, LyricModel } from "../entities/Lyric";
 import { Song } from "../entities/Song";
@@ -6,6 +5,11 @@ import { Ref } from "../types";
 
 @Service()
 export class LyricService {
+  /**
+   * Get lyric by id
+   * @param {string} lyricId 
+   * @returns {Promise<Ref<Lyric> | null>}
+   */
   async getLyric(lyricId: String): Promise<Ref<Lyric> | null> {
     const lyric = await LyricModel.findById({ _id: lyricId });
     return lyric;

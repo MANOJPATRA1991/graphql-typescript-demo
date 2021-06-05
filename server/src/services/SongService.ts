@@ -10,6 +10,7 @@ export class SongService {
       .find({});
     return songs;
   }
+  
   async getSong(song_id: String): Promise<Ref<Song> | null> {
     const song = await SongModel.findById({ _id: song_id });
     return song;
@@ -38,6 +39,6 @@ export class SongService {
   }
   
   deleteSong(songId: String) {
-    return SongModel.remove({ _id: songId });
+    return SongModel.findByIdAndRemove(songId);
   }
 }

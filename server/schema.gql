@@ -8,6 +8,11 @@ input AddLyricsToSong {
   id: ID!
 }
 
+input AuthUser {
+  email: String!
+  password: String!
+}
+
 """The lyrics model"""
 type Lyric {
   content: String!
@@ -21,12 +26,16 @@ type Mutation {
   addSong(title: String!): Song!
   deleteSong(id: String!): Song!
   likeLyric(id: String!): Lyric!
+  login(user: AuthUser!): User!
+  logout: User!
+  signup(user: AuthUser!): User!
 }
 
 type Query {
   lyric(id: String!): Lyric!
   song(id: String!): Song!
   songs: [Song!]!
+  user: User!
 }
 
 """The song model"""
@@ -34,4 +43,10 @@ type Song {
   id: ID!
   lyrics: [Lyric!]!
   title: String!
+}
+
+"""The user model"""
+type User {
+  email: String!
+  id: ID!
 }

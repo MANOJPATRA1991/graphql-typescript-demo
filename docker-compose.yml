@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  mongodb_container:
+    image: mongo:latest
+    container_name: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+  server:
+    links:
+      - mongodb_container
+    depends_on:
+      - mongodb_container
+    container_name: graphql_server
+    restart: always
+    build: ./server
+    ports:
+      - 8000:8000
+    stdin_open: true
+    tty: true
+  client:
+    depends_on:
+      - server
+    container_name: graphql_client
+    build: ./client
+    ports:
+      - 3000:3000
+
+volumes:
+  mongodb_data_container:

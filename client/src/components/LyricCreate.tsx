@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { ADD_LYRIC_TO_SONG } from '../graphql/mutations/lyric';
 import { AddLyricVars } from '../graphql/types/lyric';
 import { Song } from '../graphql/types/song';

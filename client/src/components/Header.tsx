@@ -1,9 +1,7 @@
-import { useMutation, useQuery } from '@apollo/client';
-import React, { ReactNode } from 'react';
+import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { AuthType } from '../types';
 import { LOGOUT_USER } from '../graphql/mutations/user';
-import { GET_CURRENT_USER } from '../graphql/queries/user';
 
 type HeaderProps = {
   refetchUser: Function,

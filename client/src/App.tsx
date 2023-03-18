@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
 import './App.css';
 import { Header } from './components/Header';
 import { Main } from './components/Main';
@@ -19,6 +18,7 @@ export const App = () => {
     if (!loading && data) {
       setAuthentication(true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, data]);
 
   const refetchUser = async () => {
